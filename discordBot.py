@@ -32,11 +32,12 @@ async def on_ready():
     await schedule_daily_message()
 
 #Daily Tarot Card
-@bot.slash_command(name = "dailytarot" , description = "A daily tarot Card")
-async def tarotfunc(interaction: nextcord.Interaction):
+@bot.slash_command(name = "dailytarot" , description = "Enter your first name to get a Tarot Card")
+async def tarotfunc(interaction: nextcord.Interaction , name : str ):
     current_date = datetime.datetime.now().date()
     #current_date = current_date + datetime.timedelta(days = 15 )
-    randominteger = 'RandString' + str(current_date)
+    name = name.lower()
+    randominteger = name + str(current_date)
     newint = 0
 
     for c in randominteger:
@@ -45,7 +46,7 @@ async def tarotfunc(interaction: nextcord.Interaction):
     random.seed(newint)
 
     newint = random.randint(0,21)
-    await interaction.send(tarot[newint])
+    await interaction.send(f"Hi {name}, your tarot card for {current_date} is {tarot[newint]}")
 
 #daily message scheduler
 async def schedule_daily_message():
