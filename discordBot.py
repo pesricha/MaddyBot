@@ -23,7 +23,7 @@ tarot = ['The Fool',
 
 bot = commands.Bot(command_prefix="$", intents=intents)
 
-TESTING_GUILD_ID = ######### YOUR SERVER ID 
+TESTING_GUILD_ID =  ####### #server id
 bot = commands.Bot()
 
 @bot.event
@@ -31,11 +31,8 @@ async def on_ready():
     print(f'We have logged in as {bot.user}')
     await schedule_daily_message()
 
-@bot.slash_command(name = "killthislove" , description= "To kill This love" , guild_ids=[TESTING_GUILD_ID])
-async def hello(interaction: nextcord.Interaction):
-    await interaction.send("Hello Bitch!")
-
-@bot.slash_command(name = "dailytarot" , description = "A daily tarot Card for J")
+#Daily Tarot Card
+@bot.slash_command(name = "dailytarot" , description = "A daily tarot Card")
 async def tarotfunc(interaction: nextcord.Interaction):
     current_date = datetime.datetime.now().date()
     #current_date = current_date + datetime.timedelta(days = 15 )
@@ -59,11 +56,11 @@ async def schedule_daily_message():
         wait_time = (then-now).total_seconds()
         await asyncio.sleep(delay = wait_time )
 
-        channel = bot.get_channel('YOUR CHANNEL ID')
+        channel = bot.get_channel(###Your channel ID)
         if(True):
             print(then, then.isoweekday() )
             await channel.send(f"Test Message {then} {then.isoweekday()}")
         
         
 
-bot.run('YOUR BOT TOKEN')
+bot.run('YOUR BOT TOKEN')   
