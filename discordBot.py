@@ -21,6 +21,15 @@ tarot = ['The Fool',
 'Temperance','The Devil','The Tower','The Star','The Moon',
 'The Sun','Judgement','The World']
 
+eventlist = [                                                          #EVENT NAME LIST
+              [#hour , #minute , #dayofweek , #event name],
+              [#hour , #minute , #dayofweek , #event name],
+              [#hour , #minute , #dayofweek , #event name],
+              [#hour , #minute , #dayofweek , #event name],
+               -------------------------------------------
+               -------------------------------------------
+            ]
+
 bot = commands.Bot(command_prefix="$", intents=intents)
 
 TESTING_GUILD_ID =  ####### #server id
@@ -53,14 +62,18 @@ async def schedule_daily_message():
     
     while True:
         now = datetime.datetime.now()
-        then = now + datetime.timedelta(minutes=1)
+        then = now + datetime.timedelta(seconds=5)
         wait_time = (then-now).total_seconds()
         await asyncio.sleep(delay = wait_time )
 
-        channel = bot.get_channel(###Your channel ID)
-        if(True):
-            print(then, then.isoweekday() )
-            await channel.send(f"Test Message {then} {then.isoweekday()}")
+        channel = bot.get_channel("Target Channel int")
+        
+        for lis in eventlist:
+            weekday = then.isoweekday()
+            if  lis[2] == weekday or lis[2] == -1:
+                if(then.hour == lis[0] and then.minute == lis[1]):
+                    await channel.send(f"Hi Friend! Its {then.hour}:{then.minute}, time for {lis[3]}")
+                    await asyncio.sleep(delay = 60)
         
         
 
