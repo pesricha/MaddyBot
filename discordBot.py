@@ -55,7 +55,8 @@ async def tarotfunc(interaction: nextcord.Interaction , name : str ):
     random.seed(newint)
 
     newint = random.randint(0,21)
-    await interaction.send(f"Hi {name}, your tarot card for {current_date} is {tarot[newint]}")
+    filename = "Tarot\\" + str(newint) + '.jpg'
+    await interaction.send(f"Hi {name}, your tarot card for {current_date} is {tarot[newint]}" , file=nextcord.File(filename))
 
 #daily message scheduler
 async def schedule_daily_message():
