@@ -76,6 +76,16 @@ async def schedule_daily_message():
                     await channel.send(f"Hi Friend! Its {then.hour}:{then.minute}, time for {lis[3]}")
                     await asyncio.sleep(delay = 60)
         
-        
+#command to add event
+@bot.slash_command(name="addevent" , description = "add an event to the existing list of events")
+async def addevent(interaction:nextcord.Integration,
+hour:int , minutes:int , day : int, eventname :str):
+
+    if(0<=hour<24 and 0<=minutes<60 and -1<=day<=7 and day!=0):
+        newlist = [hour,minutes, day, eventname]
+        eventlist.append(newlist)
+        await interaction.send("Event Added")
+    else:
+        await interaction.send("Invalid Event , make sure 0 <=hour <24 and 0 <=minutes <60 and -1 <=day <=7 and day != 0")
 
 bot.run('YOUR BOT TOKEN')   
